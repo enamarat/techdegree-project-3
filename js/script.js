@@ -69,7 +69,6 @@ document.getElementById("design").addEventListener('change', ()=>{
   }
 });
 
-
 /*************Register for Activities*************************************/
 // Creating a word "Total" under checkboxes
 const spanTotal = document.createElement("span");
