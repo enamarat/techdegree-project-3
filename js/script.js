@@ -251,18 +251,26 @@ document.querySelector("button").addEventListener('click', (e)=> {
     checkIfEmpty("#cvv", 16, "yes", "Enter CVV", "CVV:");
   }
 
-  /***Email field must be a validly formatted e-mail address***/
+  /*****Email field must be a validly formatted e-mail address******/
   const email = document.getElementById('mail');
-  if (!email.validity.valid) {
+  /*A function which checks format of email*/
+  const validateEmail = (emailAddress) => {
+    const mailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+    return mailFormat.test(emailAddress.value);
+  }
+ /* If typed email is in wrong format form is prevented from
+  submission and error message appears*/
+  validateEmail(email);
+  if (!validateEmail(email) && email.value.length > 0) {
     e.preventDefault();
     document.querySelectorAll('label')[1].textContent = "Invalid format of email";
     document.querySelectorAll('label')[1].setAttribute("class", "warning");
-    mail.setAttribute("class", "warning-field");
-  } else if (email.value !=="") {
-      document.querySelectorAll('label')[1].classList.remove("warning");
-      mail.classList.remove("warning-field");
-      document.querySelectorAll('label')[1].textContent = "Email:";
-    }
+    email.setAttribute("class", "warning-field");
+  } else {
+    document.querySelectorAll('label')[1].classList.remove("warning");
+    email.classList.remove("warning-field");
+    document.querySelectorAll('label')[1].textContent = "Email:";
+  }
 
     /***User must select at least one checkbox under the "Register for Activities" section of the form***/
     const checkboxes = document.querySelectorAll('[type = checkbox]');
@@ -319,6 +327,7 @@ document.querySelector("button").addEventListener('click', (e)=> {
 
         for (j = 0; j < field.value.length; j += 1) {
           if (matchedSymbols.indexOf(field.value[j]) == -1) {
+            e.preventDefault();
             document.querySelectorAll('label')[labelNumber].textContent = "Enter only digits";
             document.querySelectorAll('label')[labelNumber].setAttribute("class", "warning");
             field.setAttribute("class", "warning-field");
@@ -345,15 +354,25 @@ document.querySelector("button").addEventListener('click', (e)=> {
 /***Real-time Error Messages***/
   /***Email field must be a validly formatted e-mail address***/
 const email = document.getElementById('mail');
-email.addEventListener('keyup', ()=> {
-  if (!email.validity.valid) {
-    //e.preventDefault();
+
+/*A function which checks format of email**/
+const validateEmail = (emailAddress) => {
+  const mailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
+  return mailFormat.test(emailAddress.value);
+}
+
+email.addEventListener('keyup', (e)=> {
+  validateEmail(email);
+  /* If typed email is in wrong format form is prevented from
+   submission and error message appears*/
+  if (!validateEmail(email) && email.value.length > 0) {
+    e.preventDefault();
     document.querySelectorAll('label')[1].textContent = "Invalid format of email";
     document.querySelectorAll('label')[1].setAttribute("class", "warning");
-    mail.setAttribute("class", "warning-field");
+    email.setAttribute("class", "warning-field");
   } else {
     document.querySelectorAll('label')[1].classList.remove("warning");
-    mail.classList.remove("warning-field");
+    email.classList.remove("warning-field");
     document.querySelectorAll('label')[1].textContent = "Email:";
   }
 });
