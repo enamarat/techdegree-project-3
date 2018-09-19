@@ -212,7 +212,6 @@ document.getElementById("payment").addEventListener('change', ()=> {
   }
 })
 
-
 /************************Validation**********************************/
 /***What happens when "Submit" button is clicked***/
 document.querySelector("button").addEventListener('click', (e)=> {
