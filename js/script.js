@@ -72,7 +72,6 @@ document.getElementById("design").addEventListener('change', ()=>{
 /*************Register for Activities*************************************/
 // Creating a word "Total" under checkboxes
 const spanTotal = document.createElement("span");
-//spanTotal.textContent = "Total:";
 spanTotal.style.fontWeight = "bold";
 document.querySelector(".activities").appendChild(spanTotal);
 spanTotal.style.display = "none";
@@ -193,7 +192,7 @@ document.querySelector('[value = select_method]').disabled = true;
 /* Making conditions: if certain option is chosen the corresponding
 infromation will be dispalyed and other options will be hidden*/
 document.getElementById("payment").addEventListener('change', ()=> {
-  switch (document.getElementById("payment").value) {
+  switch (document.querySelector("#payment").value) {
     case "credit_card":
     document.querySelectorAll('p')[0].style.display = "none";
     document.querySelectorAll('p')[1].style.display = "none";
@@ -210,12 +209,12 @@ document.getElementById("payment").addEventListener('change', ()=> {
     document.querySelector('#credit-card').style.display = "none";
     break;
   }
-})
+});
 
-/************************Validation**********************************/
+/*****************************VALIDATION**********************************/
 /***What happens when "Submit" button is clicked***/
 document.querySelector("button").addEventListener('click', (e)=> {
-  /***Empty fields***/
+  /******************Empty fields***********************************/
   // Function which checks whether text field is empty or not
   const checkIfEmpty = (id, labelNumber, needsMessage, message, initialLabel) => {
     if (document.querySelector(id).value == "") {
@@ -234,25 +233,20 @@ document.querySelector("button").addEventListener('click', (e)=> {
 
   // Name field can't be blank
   checkIfEmpty("#name", 0, "yes", "Please provide your name", "Name:");
-
   // Email field can't be blank
   checkIfEmpty("#mail", 1, "yes", "Please provide your email", "Email:");
-
-
   /* Following fields are checked for errors only if "Credit card"
-  option is chosen in "Payment Info" drop down menu*/
-  if (document.querySelector('#payment').value = "credit_card") {
+  option is chosen in "Payment Info" drop down menu */
+  if (document.querySelector('#payment').value === "credit_card") {
     // Credit card field can't be blank
     checkIfEmpty("#cc-num", 14, "yes", "Enter a credit card number", "Card Number:");
-
     // Zip Code field can't be blank
     checkIfEmpty("#zip", 15, "yes", "Enter a zip code", "Zip Code:");
-
     // CVV field can't be blank
     checkIfEmpty("#cvv", 16, "yes", "Enter CVV", "CVV:");
   }
 
-  /*****Email field must be a validly formatted e-mail address******/
+  /*********Email field must be a validly formatted e-mail address**********/
   const email = document.getElementById('mail');
   /*A function which checks format of email*/
   const validateEmail = (emailAddress) => {
@@ -269,10 +263,11 @@ document.querySelector("button").addEventListener('click', (e)=> {
     email.setAttribute("class", "warning-field");
   }
 
-    /***User must select at least one checkbox under the "Register for Activities" section of the form***/
+    /*********** User must select at least one checkbox under the
+    "Register for Activities" section of the form **************/
     const checkboxes = document.querySelectorAll('[type = checkbox]');
     const chosenActivities = [];
-    // If checkbox is checked it's added to "chosenActivities" array/
+    // If checkbox is checked it's added to "chosenActivities" array
     for (i = 0; i < checkboxes.length; i += 1) {
       if (checkboxes[i].checked === true) {
         chosenActivities.push(checkboxes[i]);
@@ -289,6 +284,7 @@ document.querySelector("button").addEventListener('click', (e)=> {
       document.querySelectorAll('legend')[2].classList.remove("warning");
     }
 
+  /*****************Credit card validation**************************/
   /*Functions which check values of input fields for "Credit card"
   payment information"*/
     const creditCardNumber = document.querySelector('#cc-num');
@@ -333,7 +329,7 @@ document.querySelector("button").addEventListener('click', (e)=> {
       }
 
     // If "Credit card" option is chosen in "Payment Info" section
-    if (document.querySelector('#payment').value = "credit_card") {
+    if (document.querySelector('#payment').value === "credit_card") {
       /*Credit Card field should only accept a number between 13 and 16 digits*/
       acceptedRange(creditCardNumber, 13, 16, 14, "yes", "Enter from 13 to 16 symbols");
       // The Zip Code field should accept a 5-digit number.
@@ -348,7 +344,7 @@ document.querySelector("button").addEventListener('click', (e)=> {
     }
 });
 
-/***Real-time Error Messages***/
+/****************************REAL TIME ERROR MESSAGES***********************/
   /***Email field must be a validly formatted e-mail address***/
 const email = document.getElementById('mail');
 
