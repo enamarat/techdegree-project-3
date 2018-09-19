@@ -212,6 +212,7 @@ document.getElementById("payment").addEventListener('change', ()=> {
   }
 })
 
+
 /************************Validation**********************************/
 /***What happens when "Submit" button is clicked***/
 document.querySelector("button").addEventListener('click', (e)=> {
@@ -237,6 +238,7 @@ document.querySelector("button").addEventListener('click', (e)=> {
 
   // Email field can't be blank
   checkIfEmpty("#mail", 1, "yes", "Please provide your email", "Email:");
+
 
   /* Following fields are checked for errors only if "Credit card"
   option is chosen in "Payment Info" drop down menu*/
@@ -266,10 +268,6 @@ document.querySelector("button").addEventListener('click', (e)=> {
     document.querySelectorAll('label')[1].textContent = "Invalid format of email";
     document.querySelectorAll('label')[1].setAttribute("class", "warning");
     email.setAttribute("class", "warning-field");
-  } else {
-    document.querySelectorAll('label')[1].classList.remove("warning");
-    email.classList.remove("warning-field");
-    document.querySelectorAll('label')[1].textContent = "Email:";
   }
 
     /***User must select at least one checkbox under the "Register for Activities" section of the form***/
@@ -360,7 +358,6 @@ const validateEmail = (emailAddress) => {
   const mailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
   return mailFormat.test(emailAddress.value);
 }
-
 email.addEventListener('keyup', (e)=> {
   validateEmail(email);
   /* If typed email is in wrong format form is prevented from
